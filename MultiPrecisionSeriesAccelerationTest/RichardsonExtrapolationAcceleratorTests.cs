@@ -22,6 +22,10 @@ namespace MultiPrecisionSeriesAccelerationTest {
                 Console.WriteLine($"acc err: {accelerator.Error:e10}");
                 Console.WriteLine($"raw err: {raw_err:e10}");
                 Console.WriteLine($"ext err: {ext_err:e10}\n");
+
+                if (MultiPrecision<Pow2.N8>.IsFinite(accelerator.LastValue) && n > 4) {
+                    Assert.IsTrue(raw_err > ext_err);
+                }
             }
         }
     }
