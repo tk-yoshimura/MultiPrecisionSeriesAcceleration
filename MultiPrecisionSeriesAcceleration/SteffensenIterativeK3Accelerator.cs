@@ -1,7 +1,7 @@
 ﻿using MultiPrecision;
 
 namespace MultiPrecisionSeriesAcceleration {
-    public class SteffiensenIterativeK3Accelerator<N> : SeriesAccelerator<N> where N : struct, IConstant {
+    public class SteffensenIterativeK3Accelerator<N> : SeriesAccelerator<N> where N : struct, IConstant {
         readonly List<MultiPrecision<N>> a = new(), b = new();
 
         public override int SamplesCount => a.Count;

@@ -1,11 +1,11 @@
 ﻿using MultiPrecision;
 
 namespace MultiPrecisionSeriesAcceleration {
-    public class SteffiensenIterativeKAutoAccelerator<N> : SeriesAccelerator<N> where N : struct, IConstant {
+    public class SteffensenIterativeKAutoAccelerator<N> : SeriesAccelerator<N> where N : struct, IConstant {
         readonly List<MultiPrecision<N>> b = new();
         readonly AitkenDeltaSquaredAccelerator<N> k1_accelerator = new();
-        readonly SteffiensenIterativeK2Accelerator<N> k2_accelerator = new();
-        readonly SteffiensenIterativeK3Accelerator<N> k3_accelerator = new();
+        readonly SteffensenIterativeK2Accelerator<N> k2_accelerator = new();
+        readonly SteffensenIterativeK3Accelerator<N> k3_accelerator = new();
 
         public override int SamplesCount => k1_accelerator.SamplesCount;
 

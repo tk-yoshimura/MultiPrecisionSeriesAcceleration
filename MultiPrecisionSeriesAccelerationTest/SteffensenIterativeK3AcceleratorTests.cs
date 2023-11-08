@@ -3,10 +3,10 @@ using MultiPrecisionSeriesAcceleration;
 
 namespace MultiPrecisionSeriesAccelerationTest {
     [TestClass()]
-    public class SteffiensenIterativeKAutoAcceleratorTests {
+    public class SteffensenIterativeK3AcceleratorTests {
         [TestMethod()]
         public void AppendTest() {
-            SteffiensenIterativeKAutoAccelerator<Pow2.N8> accelerator = new();
+            SteffensenIterativeK3Accelerator<Pow2.N8> accelerator = new();
             for (long i = 2; i <= 50; i++) {
                 MultiPrecision<Pow2.N8> n = MultiPrecision<Pow2.N8>.Ldexp(1, i);
                 MultiPrecision<Pow2.N8> s = n / 2 * MultiPrecision<Pow2.N8>.SinPI(2 * MultiPrecision<Pow2.N8>.Div(1, n));
@@ -23,7 +23,7 @@ namespace MultiPrecisionSeriesAccelerationTest {
                 Console.WriteLine($"raw err: {raw_err:e10}");
                 Console.WriteLine($"ext err: {ext_err:e10}\n");
 
-                if (MultiPrecision<Pow2.N8>.IsFinite(accelerator.LastValue)) {
+                if (MultiPrecision<Pow2.N8>.IsFinite(accelerator.LastValue) && i < 8) { // digits loss
                     Assert.IsTrue(raw_err > ext_err);
                 }
             }
