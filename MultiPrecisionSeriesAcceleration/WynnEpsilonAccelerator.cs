@@ -1,4 +1,5 @@
 ﻿using MultiPrecision;
+using System.Diagnostics;
 
 namespace MultiPrecisionSeriesAcceleration {
     public class WynnEpsilonAccelerator<N> : SeriesAccelerator<N> where N : struct, IConstant {
@@ -58,6 +59,8 @@ namespace MultiPrecisionSeriesAcceleration {
             }
 
             MultiPrecision<N> y = epsilon_table[(epsilon_table.Count - 2) & ~1][^1].Convert<N>();
+
+            Debug.WriteLine($"{epsilon_table.Count - 2 & ~1}");
 
             return y;
         }
