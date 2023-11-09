@@ -1,5 +1,4 @@
 ﻿using MultiPrecision;
-using MultiPrecisionSeriesAcceleration;
 
 namespace MultiPrecisionSeriesAccelerationTest {
     [TestClass()]

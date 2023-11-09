@@ -44,22 +44,17 @@ namespace MultiPrecisionSeriesAcceleration {
             epsilon_table[0].Add(new_value.Convert<Double<N>>());
             epsilon_table.Add(new List<MultiPrecision<Double<N>>>());
 
-            for (int j = 1; epsilon_table[j - 1].Count >= 2; j++) {
-                MultiPrecision<Double<N>> d = epsilon_table[j - 1][^1] - epsilon_table[j - 1][^2];
+            for (int j = 1; j < epsilon_table.Count - 1; j++) {
+                MultiPrecision<Double<N>> e, d = epsilon_table[j - 1][^1] - epsilon_table[j - 1][^2];
 
                 if (MultiPrecision<Double<N>>.IsFinite(d) && d.Exponent > new_value.Exponent - MultiPrecision<N>.Bits) {
-                    MultiPrecision<Double<N>> e = ((j > 1) ? epsilon_table[j - 2][^2] : 0) + 1 / d;
-
-                    epsilon_table[j].Add(e);
+                    e = ((j > 1) ? epsilon_table[j - 2][^2] : 0) + 1 / d;
                 }
                 else {
-                    if ((j & 1) == 1) {
-                        epsilon_table[j].Add(MultiPrecision<Double<N>>.NaN);
-                    }
-                    else {
-                        epsilon_table[j].Add(epsilon_table[j - 2][^1]);
-                    }
+                    e = ((j & 1) == 1) ? MultiPrecision<Double<N>>.NaN : epsilon_table[j - 2][^1];
                 }
+
+                epsilon_table[j].Add(e);
             }
 
             MultiPrecision<N> y = epsilon_table[(epsilon_table.Count - 2) & ~1][^1].Convert<N>();
