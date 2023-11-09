@@ -21,6 +21,9 @@ namespace MultiPrecisionSeriesAcceleration {
                     b.Add(new_value);
                 }
             }
+            else {
+                b.Add(new_value);
+            }
         }
 
         public override IEnumerable<MultiPrecision<N>> Series => b;

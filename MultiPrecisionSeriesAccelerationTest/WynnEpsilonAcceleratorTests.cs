@@ -3,10 +3,10 @@ using MultiPrecisionSeriesAcceleration;
 
 namespace MultiPrecisionSeriesAccelerationTest {
     [TestClass()]
-    public class SteffensenIterativeK2AcceleratorTests {
+    public class WynnEpsilonAcceleratorTests {
         [TestMethod()]
         public void AppendTest() {
-            SteffensenIterativeK2Accelerator<Pow2.N8> accelerator = new();
+            WynnEpsilonAccelerator<Pow2.N8> accelerator = new();
             for (long i = 2; i <= 50; i++) {
                 MultiPrecision<Pow2.N8> n = MultiPrecision<Pow2.N8>.Ldexp(1, i);
                 MultiPrecision<Pow2.N8> s = n / 2 * MultiPrecision<Pow2.N8>.SinPI(2 * MultiPrecision<Pow2.N8>.Div(1, n));
