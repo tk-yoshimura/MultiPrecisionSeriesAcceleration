@@ -21,8 +21,8 @@ for (long i = 2; i <= 50; i++) {
 
     accelerator.Append(s);
 
-    MultiPrecision<Pow2.N8> raw_err = MultiPrecision<Pow2.N8>.Abs(MultiPrecision<Pow2.N8>.PI - s);
-    MultiPrecision<Pow2.N8> ext_err = MultiPrecision<Pow2.N8>.Abs(MultiPrecision<Pow2.N8>.PI - accelerator.LastValue);
+    MultiPrecision<Pow2.N8> raw_err = MultiPrecision<Pow2.N8>.Abs(MultiPrecision<Pow2.N8>.Pi - s);
+    MultiPrecision<Pow2.N8> ext_err = MultiPrecision<Pow2.N8>.Abs(MultiPrecision<Pow2.N8>.Pi - accelerator.LastValue);
 
     Console.WriteLine($"n  : {n}");
     Console.WriteLine($"s  : {s}");
