@@ -11,8 +11,6 @@ AVX2 suppoted CPU. (Intel:Haswell(2013)-, AMD:Excavator(2015)-)
 [Download DLL](https://github.com/tk-yoshimura/MultiPrecisionSeriesAcceleration/releases)  
 [Download Nuget](https://www.nuget.org/packages/tyoshimura.MultiPrecision.seriesacceleration/)  
 
-- Import MultiPrecision(https://github.com/tk-yoshimura/MultiPrecision)
-
 ## Usage
 
 ```csharp
