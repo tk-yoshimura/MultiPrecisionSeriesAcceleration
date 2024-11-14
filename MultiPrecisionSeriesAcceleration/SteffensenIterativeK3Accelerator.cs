@@ -9,20 +9,24 @@ namespace MultiPrecisionSeriesAcceleration {
         public override int MinimumSamples => 7;
 
         public override void Append(MultiPrecision<N> new_value) {
-            a.Add(new_value);
+            lock (a) {
+                a.Add(new_value);
+            }
 
-            if (a.Count >= MinimumSamples) {
-                MultiPrecision<N> new_b = Kernel(a);
+            lock (b) {
+                if (a.Count >= MinimumSamples) {
+                    MultiPrecision<N> new_b = Kernel(a);
 
-                if (MultiPrecision<N>.IsFinite(new_b)) {
-                    b.Add(new_b);
+                    if (MultiPrecision<N>.IsFinite(new_b)) {
+                        b.Add(new_b);
+                    }
+                    else {
+                        b.Add(new_value);
+                    }
                 }
                 else {
                     b.Add(new_value);
                 }
-            }
-            else {
-                b.Add(new_value);
             }
         }
 

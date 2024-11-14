@@ -13,10 +13,14 @@ namespace MultiPrecisionSeriesAcceleration {
         public override int MinimumSamples => 3;
 
         public override void Append(MultiPrecision<N> new_value) {
-            a.Add(new_value);
+            lock (a) {
+                a.Add(new_value);
+            }
 
-            MultiPrecision<N> new_b = Kernel(new_value);
-            b.Add(new_b);
+            lock (b) {
+                MultiPrecision<N> new_b = Kernel(new_value);
+                b.Add(new_b);
+            }
         }
 
         public override IEnumerable<MultiPrecision<N>> Series => b;

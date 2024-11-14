@@ -11,20 +11,22 @@ namespace MultiPrecisionSeriesAcceleration {
         public override int MinimumSamples => 2;
 
         public override void Append(MultiPrecision<N> new_value) {
-            if (SamplesCount <= 0) {
-                values.Add(new MultiPrecision<N>[] { new_value });
-                return;
+            lock (values) {
+                if (SamplesCount <= 0) {
+                    values.Add([new_value]);
+                    return;
+                }
+
+                MultiPrecision<N>[] t = values[SamplesCount - 1], t_next = new MultiPrecision<N>[SamplesCount + 1];
+
+                t_next[0] = new_value;
+
+                for (int i = 1; i <= SamplesCount; i++) {
+                    t_next[i] = t_next[i - 1] + (t_next[i - 1] - t[i - 1]) * R(i);
+                }
+
+                values.Add(t_next);
             }
-
-            MultiPrecision<N>[] t = values[SamplesCount - 1], t_next = new MultiPrecision<N>[SamplesCount + 1];
-
-            t_next[0] = new_value;
-
-            for (int i = 1; i <= SamplesCount; i++) {
-                t_next[i] = t_next[i - 1] + (t_next[i - 1] - t[i - 1]) * R(i);
-            }
-
-            values.Add(t_next);
         }
 
         public override IEnumerable<MultiPrecision<N>> Series {
@@ -56,13 +58,19 @@ namespace MultiPrecisionSeriesAcceleration {
         }
 
         private static MultiPrecision<N> R(int i) {
-            for (int k = rs.Count; k <= i; k++) {
-                MultiPrecision<N> r = 1d / (MultiPrecision<N>.Ldexp(1d, k * 2) - 1);
-
-                rs.Add(r);
+            if (i < rs.Count) {
+                return rs[i];
             }
 
-            return rs[i];
+            lock (rs) {
+                for (int k = rs.Count; k <= i; k++) {
+                    MultiPrecision<N> r = 1d / (MultiPrecision<N>.Ldexp(1d, k * 2) - 1);
+
+                    rs.Add(r);
+                }
+
+                return rs[i];
+            }
         }
     }
 }
