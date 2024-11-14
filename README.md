@@ -1,5 +1,5 @@
 # MultiPrecisionSeriesAcceleration
- MultiPrecision Series Acceleration Implements
+ MultiPrecision Series Acceleration Implements 
 
 ## Requirement
 .NET 8.0  
