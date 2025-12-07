@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MultiPrecision.SeriesAcceleration")]
-[assembly: AssemblyCopyright("Copyright © T.Yoshimura 2023-2024")]
+[assembly: AssemblyCopyright("Copyright © T.Yoshimura 2023-2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -15,6 +15,6 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("0339055A-502C-4B1E-938A-74F07C2F37E3")]
 
-[assembly: AssemblyVersion("1.2.1.*")]
+[assembly: AssemblyVersion("2.0.0.*")]
 
 [assembly: InternalsVisibleTo("MultiPrecisionSeriesAccelerationTest")]
